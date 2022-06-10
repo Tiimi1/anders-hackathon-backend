@@ -6,25 +6,26 @@ from notes.models import Category, Group, Location, LocationGroup, Task
 class LocationModelSerializer(ModelSerializer):
     class Meta:
         model = Location
-        fields = ("longitude", "latitude", "name")
+        fields = ("id", "longitude", "latitude", "name")
 
 
 class LocationGroupModelSerializer(ModelSerializer):
     class Meta:
         model = LocationGroup
-        fields = ("locations", "name")
+        fields = ("id", "locations", "name")
 
 
 class CategoryModelSerializer(ModelSerializer):
     class Meta:
         model = Category
-        fields = ("name", "range")
+        fields = ("id", "name", "range")
 
 
 class TaskModelSerializer(ModelSerializer):
     class Meta:
         model = Task
         fields = (
+            "id",
             "title",
             "description",
             "due_date",
@@ -39,4 +40,4 @@ class TaskModelSerializer(ModelSerializer):
 class GroupModelSerializer(ModelSerializer):
     class Meta:
         model = Group
-        fields = ("name", "creator", "members")
+        fields = ("id", "name", "creator", "members")
