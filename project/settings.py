@@ -168,3 +168,6 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ]
 }
+
+
+DEFAULT_NOTES_RANGE = 20  # 20 m

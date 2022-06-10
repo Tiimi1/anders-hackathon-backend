@@ -17,6 +17,7 @@ class LocationGroup(models.Model):
 
 class Category(models.Model):
     name = models.CharField(verbose_name=("Name"), max_length=63)
+    range = models.PositiveSmallIntegerField(verbose_name=("Range"), blank=True, null=True)
 
 
 class Group(models.Model):
@@ -28,6 +29,7 @@ class Group(models.Model):
 class Task(models.Model):
     title = models.CharField(verbose_name=("Name"), max_length=63)
     description = models.TextField(verbose_name=("Description"))
+    range = models.PositiveSmallIntegerField(verbose_name=("Range"), blank=True, null=True)
     due_date = models.DateTimeField(verbose_name=("Due date/time"), blank=True, null=True)
     location_group = models.ForeignKey(LocationGroup, on_delete=models.CASCADE, related_name="tasks")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="tasks")
