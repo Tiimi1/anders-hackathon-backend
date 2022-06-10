@@ -18,7 +18,7 @@ class LocationGroupModelSerializer(HyperlinkedModelSerializer):
 class CategoryModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Category
-        fields = "name"
+        fields = ("name",)
 
 
 class TaskModelSerializer(HyperlinkedModelSerializer):
