@@ -24,7 +24,7 @@ class CategoryModelSerializer(HyperlinkedModelSerializer):
 class TaskModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Task
-        fields = ("title", "description", "due_date", "location", "creator", "assigned_group")
+        fields = ("title", "description", "due_date", "location_group", "creator", "assigned_group")
 
 
 class GroupModelSerializer(HyperlinkedModelSerializer):
