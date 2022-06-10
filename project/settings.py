@@ -33,7 +33,7 @@ if "SECRET_KEY" in os.environ:
     SECRET_KEY = os.environ["SECRET_KEY"]
     DEBUG = False
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", ["127.0.0.1", "localhost"])
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 sentry_sdk.init(
     dsn="https://4350d2ab715a4c0aa75de92da70bd67e@o1283322.ingest.sentry.io/6492913",
@@ -41,6 +41,11 @@ sentry_sdk.init(
     traces_sample_rate=0.1,
     send_default_pii=True,
 )
+
+if "SENTRY_DSN" in os.environ:
+    sentry_sdk.init(
+        dsn=os.environ["SENTRY_DSN"], integrations=[DjangoIntegration()], traces_sample_rate=0.1, send_default_pii=True
+    )
 
 
 # Application definition
