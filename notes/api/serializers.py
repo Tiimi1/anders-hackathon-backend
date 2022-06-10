@@ -10,6 +10,8 @@ class LocationModelSerializer(ModelSerializer):
 
 
 class LocationGroupModelSerializer(ModelSerializer):
+    locations = LocationModelSerializer(many=True)
+
     class Meta:
         model = LocationGroup
         fields = ("id", "locations", "name")
@@ -22,6 +24,8 @@ class CategoryModelSerializer(ModelSerializer):
 
 
 class TaskModelSerializer(ModelSerializer):
+    location_group = LocationGroupModelSerializer()
+
     class Meta:
         model = Task
         fields = (
