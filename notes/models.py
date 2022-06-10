@@ -7,8 +7,8 @@ UserModel = get_user_model()
 
 
 class Location(models.Model):
-    longitude = models.DecimalField(verbose_name=("Longitude"), max_digits=10, decimal_places=10)
-    latitude = models.DecimalField(verbose_name=("Latitude"), max_digits=10, decimal_places=10)
+    longitude = models.DecimalField(verbose_name=("Longitude"), max_digits=13, decimal_places=10)
+    latitude = models.DecimalField(verbose_name=("Latitude"), max_digits=13, decimal_places=10)
     name = models.CharField(verbose_name=("Name"), max_length=63)
 
 
