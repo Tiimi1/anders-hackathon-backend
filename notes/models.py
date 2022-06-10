@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
 from django.db import models
 
 UserModel = get_user_model()
@@ -11,10 +10,26 @@ class Location(models.Model):
     name = models.CharField(verbose_name=("Name"), max_length=63)
 
 
+class LocationGroup(models.Model):
+    name = models.CharField(verbose_name=("Name"), max_length=63)
+    locations = models.ManyToManyField(Location)
+
+
+class Category(models.Model):
+    name = models.CharField(verbose_name=("Name"), max_length=63)
+
+
+class Group(models.Model):
+    name = models.CharField(verbose_name=("Name"), max_length=63)
+    creator = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    members = models.ManyToManyField(UserModel)
+
+
 class Task(models.Model):
     title = models.CharField(verbose_name=("Name"), max_length=63)
     description = models.TextField(verbose_name=("Description"))
     due_date = models.DateTimeField(verbose_name=("Due date/time"), blank=True, null=True)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location_group = models.ForeignKey(LocationGroup, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     creator = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     assigned_group = models.ManyToManyField(Group)
