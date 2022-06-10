@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,15 +35,8 @@ if "SECRET_KEY" in os.environ:
 
 ALLOWED_HOSTS = ["*"]
 
-
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-
 sentry_sdk.init(
-    dsn=os.environ["SENTRY_DSN"],
-    integrations=[DjangoIntegration()],
-    traces_sample_rate=0.1,
-    send_default_pii=True
+    dsn=os.environ["SENTRY_DSN"], integrations=[DjangoIntegration()], traces_sample_rate=0.1, send_default_pii=True
 )
 
 
@@ -160,3 +156,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ]
+}
