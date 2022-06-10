@@ -4,6 +4,11 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 
+def forwards(apps, schema_editor):
+    Task = apps.get_model("notes", "Task")
+    Task.objects.all().delete()
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -54,6 +59,7 @@ class Migration(migrations.Migration):
             name="is_complete",
             field=models.BooleanField(default=False, verbose_name="Is Complete"),
         ),
+        migrations.RunPython(forwards, migrations.RunPython.noop),
         migrations.AddField(
             model_name="task",
             name="location",
