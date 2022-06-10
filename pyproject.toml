@@ -6,7 +6,7 @@ authors = ["William Lindholm <william.lindholm@ander.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-Django = "^4.0.5"
+django = "^4.0.5"
 djangorestframework = "^3.13.1"
 gunicorn = "^20.1.0"
 psycopg2 = "^2.9.3"
@@ -18,3 +18,13 @@ drf-yasg = "^1.20.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+exclude = "(migrations|node_modules)"
+line_length = 120
+
+[tool.isort]
+profile = "black"
+line_length=120
+atomic = true
+skip_glob = ["*/migrations/*", "*/node_modules/*"]
